@@ -1,0 +1,27 @@
+<div id="app">
+    <section  class="slider-preview">
+        <div class="container">
+            <div [ngStyle]="slider.children[0].meta_data.text_content_render.style">
+                <h2 [ngStyle]="slider.children[0].meta_data.text_1_render.style" >{{slider.children[0].text_1}}</h2>
+                <p [ngStyle]="slider.children[0].meta_data.long_text_1_render.style">{{slider.children[0].long_text_1}}</p>
+                <a [attr.href]="slider.children[0].links[0].url" [ngClass]="slider.children[0].meta_data.links_class" >
+                    <p>{{slider.children[0].links[0].title}}</p>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="container" id="endless-customization-design" >
+        <div [ngStyle]="slider.children[0].meta_data.text_content_render.style">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" *ngFor="let data of slider.children[0].icons">
+                        <img [src]="data.image" alt="" >
+                        <a [attr.href]="data.url" [ngClass]="slider.children[0].meta_data.links_class"><p>{{data.title}}</p></a>
+                    </div>
+                </div>
+                <div class="swiper-button-prev swiper-button-white"></div>
+                <div class="swiper-button-next swiper-button-white"></div>
+            </div>
+        </div>
+    </section>	
+</div>
