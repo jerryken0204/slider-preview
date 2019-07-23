@@ -28,7 +28,8 @@
               "src/styles.css"
             ],
             "scripts": [
-              "./node_modules/swiper/dist/js/swiper.min.js"
+              "./node_modules/swiper/dist/js/swiper.min.js",
+              "node_modules/marked/lib/marked.js"
             ]
           },
           "configurations": {

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
+import { MarkdownModule } from 'ngx-markdown';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SliderPreviewComponent } from './slider-preview/slider-preview.component';
@@ -14,7 +14,8 @@ import { SliderPreviewComponent } from './slider-preview/slider-preview.componen
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MarkdownModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

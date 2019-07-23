@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {slider} from '../slider';
 import Swiper from 'swiper';
 
 @Component({
   selector: 'slider-preview',
   templateUrl: './slider-preview.component.html',
-  styleUrls: ['./slider-preview.component.css']
+  styleUrls: ['./slider-preview.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class SliderPreviewComponent implements OnInit {
  
@@ -38,6 +39,7 @@ export class SliderPreviewComponent implements OnInit {
       }
     });
 
+    
   }
 
 
