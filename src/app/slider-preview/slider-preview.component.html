@@ -1,24 +1,40 @@
-<div id="app">
-    <section  class="slider-preview">
+<div *ngIf="slider" id="slider-preview">
+    <section class="slider-preview">
         <div class="container">
-            <div [ngStyle]="slider.children[0].meta_data.text_content_render.style">
-                <h2 [ngStyle]="slider.children[0].meta_data.text_1_render.style" >{{slider.children[0].text_1}}</h2>
-                <p [ngStyle]="slider.children[0].meta_data.long_text_1_render.style" markdown [data]="slider.children[0].long_text_1"></p>
+            <div  class="container-slider-preview"  [ngStyle]="slider.children[0].meta_data.text_content_render.style">
+                <h2 *ngIf="slider.children[0].text_1 != ''" [ngStyle]="slider.children[0].meta_data.text_1_render.style" >{{slider.children[0].text_1}}</h2>
+                <p class="regular-text" *ngIf="slider.children[0].long_text_1 != ''" [ngStyle]="slider.children[0].meta_data.long_text_1_render.style" >{{ slider.children[0].long_text_1 }}</p>
+                <ul *ngIf="slider.children[0].links[0].title!=''" [ngClass]="slider.children[0].meta_data.links_class" >
+                    <li>
+                        <a [attr.href]="slider.children[0].links[0].url" >
+                            <p [innerHTML]="slider.children[0].links[0].title"></p>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </section>
-    <section class="container" [ngStyle]="slider.children[0].meta_data.text_content_render.style">
-        <div [ngStyle]="slider.children[0].meta_data.text_content_render.style">
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide" *ngFor="let data of slider.children[0].icons">
-                        <img [src]="data.image" alt="" >
-                        <p markdown [data]="data.title"></p>
+    <section id="slider-carousel">
+            <div id="slider" [ngStyle]="slider.children[0].meta_data.text_content_render.style" >
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" *ngFor="let data of slider.children[0].icons">
+                            <img *ngIf="data.image !=''" [src]="data.image" class="img-responsive">
+                            <ul *ngIf="data.title!=''" class="link">
+                                <li>
+                                    <a *ngIf="data.url!=''&& data.title!=''" [attr.href]="data.url" [target]="data.target">
+                                        <p *ngIf="data.title !=''" [innerHTML]="data.title"> </p>
+                                    </a>
+                                    <p *ngIf="data.title !=''&& data.url==''" [innerHTML]="data.title"> </p>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+                    <div class="swiper-button-prev swiper-button-white"></div>
+                    <div class="swiper-button-next swiper-button-white"></div>
                 </div>
-                <div class="swiper-button-prev swiper-button-white"></div>
-                <div class="swiper-button-next swiper-button-white"></div>
             </div>
-        </div>
-    </section>	
+    </section>
 </div>
+
+
