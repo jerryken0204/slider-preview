@@ -27,14 +27,11 @@ beforeEach(() => {
   fixture = TestBed.createComponent(SliderPreviewComponent);
   component = fixture.componentInstance;
   element = fixture.debugElement.nativeElement;
-  component.slider = _.cloneDeep(slider.todos);
-  console.log(component.slider.children[0].text_1='');
   fixture.detectChanges();
+  component.slider = _.cloneDeep(slider.todos);
 });
 afterEach(() => {
- TestBed.resetTestingModule();
- fixture.destroy();
- element.remove();
+ document.body.removeChild(element);
 });
 
 
@@ -43,7 +40,6 @@ it('should create slide preview component', () => {
 });
 
 it('should check if there is an H2 with color white', () => {
-  component.slider = _.cloneDeep(slider.todos);
   const colorOrigin ='rgb(255, 255, 255)';
   let field: HTMLInputElement = fixture.debugElement.query(By.css('h2')).nativeElement;
   expect(field.style.color).toEqual(colorOrigin);
@@ -64,54 +60,52 @@ it('should check if there is no H2 when the text_1 is empty', () => {
  expect(fixture.debugElement.query(By.css('h2'))).toBeNull();
 });
 
-//  it('the background color of the component can be changed to `red` with meta', () => {
-//   expect(component).toBeFalsy();
-// });
+it('should check if there is no P when the long_text_1 is empty', () => {
+  expect(fixture.debugElement.query(By.css('.regular-text'))).toBeTruthy();
+  component.slider.children[0].long_text_1='';
+  fixture.detectChanges();
+  expect(fixture.debugElement.query(By.css('.regular-text'))).toBeNull();
+});
 
-// it('should check if there is no P when the long_text_1 is empty', () => {
-//   expect(fixture.debugElement.query(By.css('.test1'))).toBeTruthy();
-//   component.slider.children[0].long_text_1='';
-//   fixture.detectChanges();
-//   expect(fixture.debugElement.query(By.css('.test1'))).toBeNull();
-// });
+it('the `p` color of the component can be changed to `red` with meta', () => {
+  const color ='red';
+  component.slider.children[0].meta_data.long_text_1_render.style={"color":"red"};
+  fixture.detectChanges();
+  let field: HTMLInputElement = fixture.debugElement.query(By.css('.regular-text')).nativeElement;
+  expect(field.style.color).toEqual(color);
+});
 
-// it('the `p` color of the component can be changed to `red` with meta', () => {
-//   const color ='red';
-//   component.slider.children[0].meta_data.long_text_1_render.style={"color":"red"};
-//   fixture.detectChanges();
-//   let field: HTMLInputElement = fixture.debugElement.query(By.css('.test1')).nativeElement;
-//   expect(field.style.color).toEqual(color);
-// });
+ it('should check if there is an `a` tag and it has a target of `_self`', () => {
+   let field : HTMLInputElement = fixture.debugElement.query(By.css('#slider a')).nativeElement;
+   expect(field.getAttribute('target')).toEqual('_self');
+ });
 
-//  it('should check if there is an `a` tag and it has a target of `_self`', () => {
-//    let field : HTMLInputElement = fixture.debugElement.query(By.css('#slider a')).nativeElement;
-//    expect(field.getAttribute('target')).toEqual('_self');
-//  });
-
-//  it(`should have initialized a slider`, async(inject([HttpClient, HttpTestingController],
-//    (http: HttpClient, backend: HttpTestingController) => {
-//      http.get('http://54.254.159.186:5000/api/v1/component?id=53').subscribe((next) => {
-//        expect(next).toEqual({slider:'hello'}, 'expected slider');
-//      });
-//      backend.expectOne({url:'http://54.254.159.186:5000/api/v1/component?id=53',method:'GET'});
-//      backend.verify();
-//  })));
+ it(`should have initialized a slider`, async(inject([HttpClient, HttpTestingController],
+   (http: HttpClient, backend: HttpTestingController) => {
+     http.get('http://54.254.159.186:5000/api/v1/component?id=53').subscribe((next) => {
+       expect(next).toEqual({slider:'hello'}, 'expected slider');
+     });
+     backend.expectOne({url:'http://54.254.159.186:5000/api/v1/component?id=53',method:'GET'});
+     backend.verify();
+ })));
 
 //  it('click on next will switch the image to the next image', () => {
-//    expect(component).toBeFalsy();
-//  });
-
-
-//  it('the slider p tag is generated for an image when the `title` is filled', () => {
-//   expect(fixture.debugElement.queryAll(By.css('#slider-carousel p'))).toBeTruthy();
-//  });
-
-//  it('the slider p tag is not present for an image when the `title` is empty', () => {
-//   expect(fixture.debugElement.queryAll(By.css('#slider-carousel p'))).toBeTruthy();
-//   component.slider.children[0].icons[0].title='';
+//   expect(fixture.debugElement.query(By.css('.swiper-slide.swiper-slide-active')))
 //   fixture.detectChanges();
-//   expect(fixture.debugElement.queryAll(By.css('#slider-carousel p')).length).toEqual(2);
-// });
+//   expect(fixture.debugElement.queryAll(By.css('.slider-carousel p')).length).toEqual(2);
+//  });
+
+
+ it('the slider p tag is generated for an image when the `title` is filled', () => {
+  expect(fixture.debugElement.queryAll(By.css('.slider-carousel p'))).toBeTruthy();
+ });
+
+ it('the slider p tag is not present for an image when the `title` is empty', () => {
+  expect(fixture.debugElement.queryAll(By.css('.slider-carousel p')).length).toEqual(3);
+  component.slider.children[0].icons[0].title='';
+  fixture.detectChanges();
+  expect(fixture.debugElement.queryAll(By.css('.slider-carousel p')).length).toEqual(2);
+});
 });
 
 

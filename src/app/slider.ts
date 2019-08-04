@@ -11,7 +11,7 @@ export const slider = {
       "icons": [
         {
           "url": "https://assets2.razerzone.com/images/panthera-evo/downloads/Azure.pdf",
-          "title": "Dowload this design",
+          "title": "Dowload this desig1",
           "text_1": "",
           "text_2": "",
           "description": "",
@@ -20,7 +20,7 @@ export const slider = {
         },
         {
           "url": "https://assets2.razerzone.com/images/panthera-evo/downloads/Azure.pdf",
-          "title": "Dowload this design",
+          "title": "Dowload this design2",
           "text_1": "",
           "text_2": "",
           "description": "",
@@ -29,7 +29,7 @@ export const slider = {
         },
         {
           "url": "https://assets2.razerzone.com/images/panthera-evo/downloads/Prism.pdf",
-          "title": "Dowload this design",
+          "title": "Dowload this design3",
           "text_1": "",
           "text_2": "",
           "description": "",
